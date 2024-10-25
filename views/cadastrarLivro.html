@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livro</title>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css">
+
+</head>
+<body>
+    <header>
+        <h1>Cadastro de Livro</h1>
+    </header>
+    <form action="/api/livros" method="POST">
+        <label for="titulo">Título do Livro:</label>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor" required>
+
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+
+        <label for="genero">Gênero:</label>
+        <input type="text" id="genero" name="genero" required>
+
+        <label for="dataDoacao">Data da Doação:</label>
+        <input type="date" id="dataDoacao" name="dataDoacao" required>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+    <button onclick="window.location.href='/';">Voltar à Página Inicial</button>
+
+</body>
+</html>

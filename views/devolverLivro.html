@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devolução de Livro</title>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css">
+
+</head>
+<body>
+    <header>
+        <h1>Devolução de Livro</h1>
+    </header>
+    <form action="/api/emprestimos/devolucao" method="POST">
+        <label for="idUsuario">Usuário:</label>
+        <select id="idUsuario" name="idUsuario" required>
+            <!-- As opções devem ser preenchidas dinamicamente pelo servidor -->
+        </select>
+
+        <label for="tituloLivro">Título do Livro:</label>
+        <select id="tituloLivro" name="tituloLivro" required>
+            <!-- As opções devem ser preenchidas dinamicamente pelo servidor -->
+        </select>
+
+        <label for="dataDevolucao">Data de Devolução:</label>
+        <input type="date" id="dataDevolucao" name="dataDevolucao" required>
+
+        <button type="submit">Registrar Devolução</button>
+    </form>
+    <button onclick="window.location.href='/';">Voltar à Página Inicial</button>
+
+</body>
+</html>
