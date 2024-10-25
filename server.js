@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('./db'); // Certifique-se que o caminho para sua conexão MongoDB está correto
+const mongoose = require('./db'); // Certifique-se de que o caminho para sua conexão MongoDB está correto
 const path = require('path');
 
 const app = express();
@@ -10,7 +10,9 @@ const app = express();
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));  // Serve arquivos estáticos como CSS, imagens, etc.
+app.use(express.static(path.join(__dirname, 'public')));  // Serve arquivos estáticos da pasta 'public'
+
+// Definindo o motor de visualização como EJS
 app.set('view engine', 'ejs');
 
 // Importação das rotas
@@ -25,25 +27,24 @@ app.use('/api/emprestimos', emprestimoRoutes);
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
 
 // Rotas para servir outras páginas HTML
-app.get('/views/cadastrarUsuario.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'cadastrarUsuario.html'));
+app.get('/cadastrarUsuario', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cadastrarUsuario.html'));
 });
 
-app.get('/views/cadastrarLivro.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'cadastrarLivro.html'));
+app.get('/cadastrarLivro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cadastrarLivro.html'));
 });
 
-app.get('/views/pegarLivro.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'pegarLivro.html'));
+app.get('/pegarLivro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'pegarLivro.html'));
 });
 
-app.get('/views/devolverLivro.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'devolverLivro.html'));
+app.get('/devolverLivro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'devolverLivro.html'));
 });
 
 // Inicializando o servidor
