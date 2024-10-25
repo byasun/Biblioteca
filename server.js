@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('./db'); // Certifique-se de que o caminho para sua conexão MongoDB está correto
@@ -10,7 +8,7 @@ const app = express();
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));  // Serve arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));  // Serve arquivos estáticos da pasta 'frontend/public'
 
 // Definindo o motor de visualização como EJS
 app.set('view engine', 'ejs');
@@ -27,24 +25,24 @@ app.use('/api/emprestimos', emprestimoRoutes);
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
 
 // Rotas para servir outras páginas HTML
 app.get('/cadastrarUsuario', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'cadastrarUsuario.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'cadastrarUsuario.html'));
 });
 
 app.get('/cadastrarLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'cadastrarLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'cadastrarLivro.html'));
 });
 
 app.get('/pegarLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'pegarLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'pegarLivro.html'));
 });
 
 app.get('/devolverLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'devolverLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'devolverLivro.html'));
 });
 
 // Inicializando o servidor
