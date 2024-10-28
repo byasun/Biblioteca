@@ -1,3 +1,19 @@
+/* Variáveis de cor para fácil manutenção */
+:root {
+    --cor-fundo: #faf4e0;
+    --cor-texto: #333;
+    --cor-botao: #8d6e63;
+    --cor-botao-hover: #006b34;
+    --cor-botao-secundario: #008542;
+    --cor-botao-secundario-hover: #006f34;
+    --cor-header: #f0e4d7;
+    --cor-tabela-header: #008542;
+    --cor-alerta: #f44336;
+    --cor-sucesso: #4CAF50;
+    --cor-info: #2196F3;
+    --cor-atencao: #ff9800;
+}
+
 /* Reset básico */
 * {
     margin: 0;
@@ -5,19 +21,19 @@
     box-sizing: border-box;
 }
 
-/* Estilo para o corpo da página */
+/* Corpo da página */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
     padding: 20px;
 }
 
-/* Estilo para o cabeçalho */
+/* Cabeçalho */
 header {
-    background-color: #008542;
-    color: #fff;
+    background-color: var(--cor-header);
+    color: var(--cor-texto);
     padding: 20px;
     text-align: center;
 }
@@ -26,9 +42,9 @@ header h1 {
     margin: 0;
 }
 
-/* Estilo para os botões */
+/* Botões */
 button {
-    background-color: #008542;
+    background-color: var(--cor-botao);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -40,30 +56,10 @@ button {
 }
 
 button:hover {
-    background-color: #006b34;
+    background-color: var(--cor-botao-hover);
 }
 
-/* Estilo para o rodapé */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #777;
-}
-
-/* Estilo para navegação */
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul button {
-    margin: 0 10px;
-}
-
-/* Estilo para formulários */
+/* Formulários */
 form {
     max-width: 600px;
     margin: 20px auto;
@@ -89,30 +85,25 @@ form input, form select {
 
 form button {
     width: 100%;
-    background-color: #008542;
+    background-color: var(--cor-botao-secundario);
     padding: 10px;
     border-radius: 5px;
 }
 
 form button:hover {
-    background-color: #006b34;
+    background-color: var(--cor-botao-secundario-hover);
 }
 
-/* Estilos para links */
-a {
-    color: #008542;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Estilo para tabelas */
+/* Tabelas */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+}
+
+table th {
+    background-color: var(--cor-tabela-header);
+    color: white;
 }
 
 table th, table td {
@@ -121,94 +112,44 @@ table th, table td {
     border-bottom: 1px solid #ddd;
 }
 
-table th {
-    background-color: #008542;
-    color: white;
-}
-
 table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Estilo para alertas e mensagens */
+/* Alertas */
 .alerta {
     padding: 20px;
-    background-color: #f44336;
     color: white;
     margin-bottom: 15px;
 }
 
 .alerta.sucesso {
-    background-color: #4CAF50;
+    background-color: var(--cor-sucesso);
 }
 
 .alerta.info {
-    background-color: #2196F3;
+    background-color: var(--cor-info);
 }
 
 .alerta.atencao {
-    background-color: #ff9800;
+    background-color: var(--cor-atencao);
 }
 
-/* Botão de alerta */
-.alerta button {
-    margin-left: 15px;
-    border: none;
-    padding: 10px;
-    color: white;
-    background-color: transparent;
-    cursor: pointer;
-    float: right;
-}
-
-.alerta button:hover {
-    background-color: #ddd;
-    color: black;
-}
-
+/* Navegação */
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* Coloca os botões um embaixo do outro */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-nav button {
-    background-color: #008542;
-    color: white;
-    border: none;
-    padding: 15px;
-    margin-bottom: 10px; /* Espaçamento entre os botões */
-    text-align: center;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%; /* Faz o botão ocupar 100% da largura disponível */
-    border-radius: 5px;
-}
-
-nav button:hover {
-    background-color: #006f34; /* Cor mais escura ao passar o mouse */
-}
-
-
-/* Estilo para formulários pequenos */
-form.compacto input {
-    width: calc(50% - 10px);
-    display: inline-block;
-}
-
-/* Layout responsivo */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
     }
-
-    form input, form select, form button {
-        width: 100%;
-    }
-
-    button {
+    form input, form select, form button, button {
         width: 100%;
     }
 }

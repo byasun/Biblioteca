@@ -2,13 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('./db'); // Certifique-se de que o caminho para sua conexão MongoDB está correto
 const path = require('path');
+const helmet = require('helmet'); // Para segurança
+const cors = require('cors'); // Para permitir CORS
 
 const app = express();
 
 // Middlewares
+app.use(helmet()); // Protege seu aplicativo
+app.use(cors()); // Permite CORS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));  // Serve arquivos estáticos da pasta 'frontend/public'
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
 // Definindo o motor de visualização como EJS
 app.set('view engine', 'ejs');
@@ -43,6 +47,12 @@ app.get('/pegarLivro', (req, res) => {
 
 app.get('/devolverLivro', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'public', 'devolverLivro.html'));
+});
+
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Algo deu errado!', error: err.message });
 });
 
 // Inicializando o servidor

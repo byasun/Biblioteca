@@ -5,6 +5,6 @@ const livroSchema = new mongoose.Schema({
     autor: { type: String, required: true },
     genero: { type: String, required: true },
     anoPublicacao: { type: Number, required: true },
-});
+}, { timestamps: true }); // Adiciona createdAt e updatedAt
 
 module.exports = mongoose.model('Livro', livroSchema);

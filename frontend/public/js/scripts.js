@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (formularioUsuario) {
         formularioUsuario.addEventListener('submit', async function (e) {
             e.preventDefault();
+            if (!validarFormularioUsuario()) return; // Chama a validação
+
             const formData = new FormData(formularioUsuario);
             const data = Object.fromEntries(formData.entries());
 
@@ -17,11 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     body: JSON.stringify(data)
                 });
+
+                if (!response.ok) throw new Error('Erro na resposta do servidor');
+
                 const result = await response.json();
                 alert('Usuário cadastrado com sucesso: ' + result.nome);
+                formularioUsuario.reset(); // Reseta o formulário após o envio
             } catch (error) {
                 console.error('Erro ao cadastrar usuário:', error);
-                alert('Erro ao cadastrar usuário');
+                alert('Erro ao cadastrar usuário: ' + error.message);
             }
         });
     }
@@ -30,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (formularioLivro) {
         formularioLivro.addEventListener('submit', async function (e) {
             e.preventDefault();
+            if (!validarFormularioLivro()) return; // Chama a validação
+
             const formData = new FormData(formularioLivro);
             const data = Object.fromEntries(formData.entries());
 
@@ -41,11 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     body: JSON.stringify(data)
                 });
+
+                if (!response.ok) throw new Error('Erro na resposta do servidor');
+
                 const result = await response.json();
                 alert('Livro cadastrado com sucesso: ' + result.titulo);
+                formularioLivro.reset(); // Reseta o formulário após o envio
             } catch (error) {
                 console.error('Erro ao cadastrar livro:', error);
-                alert('Erro ao cadastrar livro');
+                alert('Erro ao cadastrar livro: ' + error.message);
             }
         });
     }

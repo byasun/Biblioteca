@@ -1,31 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const Emprestimo = require('../models/Emprestimo'); // Modelo do empréstimo
+const Emprestimo = require('../models/Emprestimo');
 
 // Rota para listar todos os empréstimos
 router.get('/', async (req, res) => {
     try {
-        const emprestimos = await Emprestimo.find();
+        const emprestimos = await Emprestimo.find().populate('usuarioId livroId'); // Popula os dados dos usuários e livros
         res.json(emprestimos);
     } catch (error) {
-        res.status(500).json({ message: 'Erro ao buscar empréstimos' });
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao buscar empréstimos', error: error.message });
     }
 });
 
 // Rota para registrar um novo empréstimo
 router.post('/', async (req, res) => {
+    const { usuarioId, livroId, dataEmprestimo, dataDevolucao } = req.body;
+
     const novoEmprestimo = new Emprestimo({
-        idUsuario: req.body.idUsuario,
-        codigoBarras: req.body.codigoBarras,
-        dataEmprestimo: req.body.dataEmprestimo,
-        dataDevolucao: req.body.dataDevolucao
+        usuarioId,
+        livroId,
+        dataEmprestimo,
+        dataDevolucao,
     });
 
     try {
         const emprestimoSalvo = await novoEmprestimo.save();
         res.status(201).json(emprestimoSalvo);
     } catch (error) {
-        res.status(400).json({ message: 'Erro ao registrar empréstimo' });
+        console.error(error);
+        res.status(400).json({ message: 'Erro ao registrar empréstimo', error: error.message });
     }
 });
 
@@ -39,7 +43,8 @@ router.patch('/:id', async (req, res) => {
         );
         res.json(emprestimoAtualizado);
     } catch (error) {
-        res.status(500).json({ message: 'Erro ao atualizar data de devolução' });
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao atualizar data de devolução', error: error.message });
     }
 });
 
