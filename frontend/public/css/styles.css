@@ -14,7 +14,11 @@
     --cor-sucesso: #4CAF50;
     --cor-info: #2196F3;
     --cor-atencao: #ff9800;
+<<<<<<< HEAD:frontend/public/css/styles.css
     --cor-botao-acao: #8d6e63; /* nova cor para botões de ação */
+=======
+    --cor-botao-acao: #f3c5c5; /* nova cor para botões de ação */
+>>>>>>> 57fd4a32c6694deeb74d9bf8d1148ae10fa4949d:frontend/public/css/estilos.css
     --cor-botao-principal: #f0a500; /* nova cor para botões principais */
     --cor-fundo-alternativo: #fff8e1; /* nova cor para fundo alternativo */
 }
