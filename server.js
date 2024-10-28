@@ -12,7 +12,7 @@ app.use(helmet()); // Protege seu aplicativo
 app.use(cors()); // Permite CORS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
+app.use(express.static(path.join(__dirname, 'frontend', 'public'))); // Esta linha permanece a mesma
 
 // Definindo o motor de visualização como EJS
 app.set('view engine', 'ejs');
@@ -29,24 +29,24 @@ app.use('/api/emprestimos', emprestimoRoutes);
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
 // Rotas para servir outras páginas HTML
 app.get('/cadastrarUsuario', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'cadastrarUsuario.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'cadastrarUsuario.html'));
 });
 
 app.get('/cadastrarLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'cadastrarLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'cadastrarLivro.html'));
 });
 
 app.get('/pegarLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'pegarLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'pegarLivro.html'));
 });
 
 app.get('/devolverLivro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'devolverLivro.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'devolverLivro.html'));
 });
 
 // Middleware de tratamento de erros
