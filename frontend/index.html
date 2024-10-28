@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Comunitária</title>
-    <link rel="stylesheet" type="text/css" href="frontend/public/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"> <!-- Certifique-se de que o caminho está correto -->
 </head>
 <body>
     <header>
@@ -13,15 +13,24 @@
 
     <nav>
         <div class="menu-botoes">
-            <button onclick="window.location.href='/cadastrarUsuario';">Cadastrar Usuário</button>
-            <button onclick="window.location.href='/cadastrarLivro';">Doar Livro</button>
-            <button onclick="window.location.href='/pegarLivro';">Pegar Livro</button>
-            <button onclick="window.location.href='/devolverLivro';">Devolver Livro</button>
+            <button class="menu-botao" data-url="/cadastrarUsuario">Cadastrar Usuário</button>
+            <button class="menu-botao" data-url="/cadastrarLivro">Doar Livro</button>
+            <button class="menu-botao" data-url="/pegarLivro">Pegar Livro</button>
+            <button class="menu-botao" data-url="/devolverLivro">Devolver Livro</button>
         </div>
     </nav>
 
     <footer>
         <p>&copy; 2024 Biblioteca Comunitária</p>
     </footer>
+
+    <script src="frontend/public/js/scripts.js"></script>
+    <script>
+        document.querySelectorAll('.menu-botao').forEach(button => {
+            button.addEventListener('click', () => {
+                window.location.href = button.getAttribute('data-url');
+            });
+        });
+    </script>
 </body>
 </html>

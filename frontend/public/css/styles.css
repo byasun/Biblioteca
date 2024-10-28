@@ -3,15 +3,20 @@
     --cor-fundo: #faf4e0;
     --cor-texto: #333;
     --cor-botao: #8d6e63;
-    --cor-botao-hover: #006b34;
-    --cor-botao-secundario: #008542;
+    --cor-botao-hover: #333;
+    --cor-botao-secundario: #6b8e23;
     --cor-botao-secundario-hover: #006f34;
     --cor-header: #f0e4d7;
+    --cor-header-secundario: #9c89b8; /* nova cor para cabeçalho secundário */
     --cor-tabela-header: #008542;
+    --cor-destaque: #d0b49f; /* nova cor para destaque */
     --cor-alerta: #f44336;
     --cor-sucesso: #4CAF50;
     --cor-info: #2196F3;
     --cor-atencao: #ff9800;
+    --cor-botao-acao: #8d6e63; /* nova cor para botões de ação */
+    --cor-botao-principal: #f0a500; /* nova cor para botões principais */
+    --cor-fundo-alternativo: #fff8e1; /* nova cor para fundo alternativo */
 }
 
 /* Reset básico */
@@ -24,7 +29,7 @@
 /* Corpo da página */
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 2;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     padding: 20px;
@@ -45,13 +50,13 @@ header h1 {
 /* Botões */
 button {
     background-color: var(--cor-botao);
-    color: white;
+    color: #f1f1f1;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
     transition: background-color 0.3s ease;
 }
 
@@ -59,11 +64,17 @@ button:hover {
     background-color: var(--cor-botao-hover);
 }
 
+/* Botões de Ação */
+.menu-botoes button {
+    background-color: var(--cor-botao-acao); /* Botões de ação com nova cor */
+    color: var(--cor-texto);
+}
+
 /* Formulários */
 form {
     max-width: 600px;
     margin: 20px auto;
-    background: #fff;
+    background: var(--cor-fundo-alternativo); /* Fundo alternativo para o formulário */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -133,6 +144,16 @@ table tr:hover {
 
 .alerta.atencao {
     background-color: var(--cor-atencao);
+}
+
+nav .menu-botoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.menu-botoes button {
+    margin: 15px; /* Adiciona espaçamento entre os botões */
 }
 
 /* Navegação */
