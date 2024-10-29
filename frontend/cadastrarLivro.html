@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Livro</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-=======
-    <link rel="stylesheet" type="text/css" href="/css/estilos.css">
->>>>>>> 57fd4a32c6694deeb74d9bf8d1148ae10fa4949d
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
 </head>
 <body>
     <header>
         <h1>Cadastro de Livro</h1>
     </header>
+    
     <form action="/api/livros" method="POST">
         <label for="titulo">Título do Livro:</label>
         <input type="text" id="titulo" name="titulo" required>
@@ -32,20 +29,13 @@
 
         <button type="submit">Cadastrar</button>
     </form>
+    
     <button onclick="window.location.href='/';">Voltar à Página Inicial</button>
 
     <footer>
         <p>&copy; 2024 Biblioteca Comunitária</p>
     </footer>
 
-    <script src="frontend/public/js/scripts.js"></script>
-    <script>
-        document.querySelectorAll('.menu-botao').forEach(button => {
-            button.addEventListener('click', () => {
-                window.location.href = button.getAttribute('data-url');
-            });
-        });
-    </script>
-    
+    <script src="/public/js/scripts.js"></script>
 </body>
 </html>
