@@ -155,6 +155,20 @@ function validarData(data) {
     return regex.test(data);
 }
 
+const { body, validationResult } = require('express-validator');
+
+exports.validateUsuario = [
+    body('email').isEmail(),
+    body('senha').isLength({ min: 6 }),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        next();
+    }
+];
+
 // Exporta as funções para uso em outros arquivos
 module.exports = {
     validarFormularioUsuario,

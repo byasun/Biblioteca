@@ -13,6 +13,11 @@ const logger = require('../utils/logger');
 
 const router = express.Router();
 
+router.use('/usuarios', usuarioRoutes);
+router.use('/livros', livroRoutes);
+router.use('/emprestimos', emprestimoRoutes);
+router.use('/auth', authRoutes);
+
 // Configuração do Swagger
 const swaggerOptions = {
     definition: {
