@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devolução de Livro</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
     <header>
@@ -32,6 +32,14 @@
         <p>&copy; 2024 Biblioteca Comunitária</p>
     </footer>
 
-    <script src="/public/js/scripts.js"></script>
+    <script src="frontend/public/js/scripts.js"></script>
+    <script>
+        document.querySelectorAll('.menu-botao').forEach(button => {
+            button.addEventListener('click', () => {
+                window.location.href = button.getAttribute('data-url');
+            });
+        });
+    </script>
+    
 </body>
 </html>

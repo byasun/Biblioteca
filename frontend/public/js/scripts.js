@@ -61,4 +61,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBotoes = document.querySelectorAll('.menu-botao');
+        
+        menuBotoes.forEach(botao => {
+            botao.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                window.location.href = url;
+            });
+        });
+    });
+    
 });
