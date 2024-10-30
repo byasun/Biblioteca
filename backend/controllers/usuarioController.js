@@ -110,3 +110,18 @@ exports.notificarUsuario = catchAsync(async (req, res) => {
         }
     });
 });
+
+exports.login = catchAsync(async (req, res) => {
+    const { email, senha } = req.body;
+    // Adicione aqui a lógica de autenticação do usuário
+    const usuario = await Usuario.findOne({ email });
+    if (!usuario || !(await usuario.compararSenha(senha))) {
+        throw new AppError('Credenciais inválidas', 401);
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Login bem-sucedido',
+        data: { usuario }
+    });
+});
