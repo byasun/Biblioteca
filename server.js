@@ -1,7 +1,7 @@
 const app = require('./app');
-const config = require('./config');
-const logger = require('./utils/logger');
-const connectDB = require('./config/database');
+const config = require('./backend/config');
+const logger = require('./backend/utils/logger');
+const connectDB = require('./backend/config/database');
 
 const startServer = async () => {
     try {

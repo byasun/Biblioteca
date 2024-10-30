@@ -1,26 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const usuarioRoutes = require('./routes/usuarioRoutes');
-const livroRoutes = require('./routes/livroRoutes');
-const emprestimoRoutes = require('./routes/emprestimoRoutes');
-const globalErrorHandler = require('./controllers/errorController');
+const usuarioRoutes = require('./backend/routes/usuarioRoutes');
+const livroRoutes = require('./backend/routes/livroRoutes');
+const emprestimoRoutes = require('./backend/routes/emprestimoRoutes');
+const globalErrorHandler = require('./backend/controllers/errorController');
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
-const logger = require('./utils/logger');
+const logger = require('./backend/utils/logger');
 
 dotenv.config({ path: './config.env' });
 
 const app = express();
+const routes = require('./routes/index');
 
-// Middleware de segurança
-app.use(helmet());
-app.use(cors());
-app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(routes);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -45,7 +43,7 @@ const connectDB = async () => {
 };
 
 // Rotas
-app.use('/api/v1', require('./routes'));
+app.use('/api/v1', require('./backend/routes'));
 
 // Tratamento de erros global
 app.use(globalErrorHandler);
