@@ -17,13 +17,13 @@ const criarLivroLimiter = rateLimit({
 
 router.get('/',
     cache(300), // Cache de 5 minutos
-    validator.validateQueryParams(['page', 'limit', 'sort']),
+    validator.queryParams(['page', 'limit', 'sort']), // Validação correta
     livroController.listarLivros
 );
 
 router.get('/:id',
     cache(300), // Cache de 5 minutos
-    validator.validateParams('id'),
+    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
     livroController.getLivro
 );
 
@@ -31,9 +31,9 @@ router.get('/:id',
 router.use(authMiddleware.protect);
 
 router.post('/:id/avaliacoes',
-    validator.validateParams('id'),
-    validator.validateLivro,
-    livroController.avaliarLivro  // Alterado de adicionarAvaliacao para avaliarLivro
+    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
+    validator.validateLivro, // Valida a avaliação, ajuste conforme sua implementação
+    livroController.avaliarLivro
 );
 
 // Rotas apenas para administradores
@@ -42,19 +42,19 @@ router.use(authMiddleware.restrictTo('admin'));
 router.post('/',
     criarLivroLimiter,
     upload.single('imagem'),
-    validator.validateLivro, // Removido os parênteses
+    validator.validateLivro, // Validação do corpo do livro
     livroController.criarLivro
 );
 
 router.patch('/:id',
-    validator.validateParams('id'),
+    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
     upload.single('imagem'),
-    validator.validateLivro, // Removido os parênteses
+    validator.validateLivro, // Validação do corpo do livro
     livroController.atualizarLivro
 );
 
 router.delete('/:id',
-    validator.validateParams('id'),
+    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
     livroController.deletarLivro
 );
 
