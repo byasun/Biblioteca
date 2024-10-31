@@ -5,18 +5,17 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.protect = catchAsync(async (req, res, next) => {
-    let token;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        token = req.headers.authorization.split(' ')[1];
-    }
+    const token = req.headers.authorization?.startsWith('Bearer') 
+        ? req.headers.authorization.split(' ')[1] 
+        : null;
 
     if (!token) {
         return next(new AppError('Você não está logado. Por favor, faça login para ter acesso.', 401));
     }
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
     const usuarioAtual = await Usuario.findById(decoded.id);
+    
     if (!usuarioAtual) {
         return next(new AppError('O usuário deste token não existe mais.', 401));
     }
@@ -42,8 +41,8 @@ exports.refreshToken = catchAsync(async (req, res, next) => {
     }
 
     const decoded = await promisify(jwt.verify)(refreshToken, process.env.JWT_SECRET);
-
     const usuarioAtual = await Usuario.findById(decoded.id);
+
     if (!usuarioAtual) {
         return next(new AppError('Usuário não encontrado', 401));
     }
