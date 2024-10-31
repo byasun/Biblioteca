@@ -15,46 +15,49 @@ const criarLivroLimiter = rateLimit({
     message: 'Muitos livros criados a partir deste IP, tente novamente após uma hora'
 });
 
-router.get('/',
+// Rotas públicas
+router.get('/', 
     cache(300), // Cache de 5 minutos
-    validator.queryParams(['page', 'limit', 'sort']), // Validação correta
+    validator.queryParams(['page', 'limit', 'sort']), 
     livroController.listarLivros
 );
 
-router.get('/:id',
-    cache(300), // Cache de 5 minutos
-    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
+router.get('/:id', 
+    cache(300), 
+    validator.params(['id']), 
     livroController.getLivro
 );
 
 // Rotas protegidas - requer autenticação
 router.use(authMiddleware.protect);
 
-router.post('/:id/avaliacoes',
-    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
-    validator.validateLivro, // Valida a avaliação, ajuste conforme sua implementação
+// Avaliar livro
+router.post('/:id/avaliacoes', 
+    validator.params(['id']), 
+    validator.validateLivro, 
     livroController.avaliarLivro
 );
 
-// Rotas apenas para administradores
+// Rotas administrativas
 router.use(authMiddleware.restrictTo('admin'));
 
-router.post('/',
-    criarLivroLimiter,
-    upload.single('imagem'),
-    validator.validateLivro, // Validação do corpo do livro
+// Criação, atualização e exclusão de livros
+router.post('/', 
+    criarLivroLimiter, 
+    upload.single('imagem'), 
+    validator.validateLivro, 
     livroController.criarLivro
 );
 
-router.patch('/:id',
-    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
-    upload.single('imagem'),
-    validator.validateLivro, // Validação do corpo do livro
+router.patch('/:id', 
+    validator.params(['id']), 
+    upload.single('imagem'), 
+    validator.validateLivro, 
     livroController.atualizarLivro
 );
 
-router.delete('/:id',
-    validator.params(['id']), // Verifica se 'id' é um parâmetro válido
+router.delete('/:id', 
+    validator.params(['id']), 
     livroController.deletarLivro
 );
 

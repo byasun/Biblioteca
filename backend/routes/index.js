@@ -13,11 +13,6 @@ const logger = require('../utils/logger');
 
 const router = express.Router();
 
-router.use('/usuarios', usuarioRoutes);
-router.use('/livros', livroRoutes);
-router.use('/emprestimos', emprestimoRoutes);
-router.use('/auth', authRoutes);
-
 // Configuração do Swagger
 const swaggerOptions = {
     definition: {
@@ -77,11 +72,6 @@ router.use('/livros', livrosRoutes);
 router.use('/emprestimos', emprestimoRoutes);
 router.use('/usuarios', usuarioRoutes);
 
-// Rota para documentação da API
-router.get('/docs', (req, res) => {
-    res.redirect('/api-docs');
-});
-
 // Tratamento de rotas não encontradas
 router.use('*', (req, res) => {
     res.status(404).json({
@@ -93,7 +83,6 @@ router.use('*', (req, res) => {
 // Tratamento de erros
 router.use((err, req, res, next) => {
     logger.error('Erro:', err);
-    
     res.status(err.status || 500).json({
         status: 'error',
         message: err.message || 'Erro interno do servidor',
