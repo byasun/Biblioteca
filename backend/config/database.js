@@ -8,7 +8,6 @@ const connectDB = async () => {
     const maxAttempts = 5;
 
     const mongoUri = process.env.MONGODB_URI;
-    console.log("Mongo URI:", mongoUri);
 
     while (attempts < maxAttempts) {
         try {
