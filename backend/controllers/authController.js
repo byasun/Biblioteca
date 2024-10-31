@@ -2,7 +2,6 @@ const Usuario = require('../models/Usuario');
 const { generateToken, generateRefreshToken, blacklistToken } = require('../config/jwt');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-const emailService = require('../config/email');
 const crypto = require('crypto');
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -27,7 +26,6 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Email ou senha incorretos', 401));
     }
 
-    // Resetar tentativas de login após sucesso
     usuario.tentativasLogin.count = 0;
     usuario.tentativasLogin.lastAttempt = null;
     await usuario.save();
@@ -59,14 +57,6 @@ exports.registro = catchAsync(async (req, res, next) => {
         matricula
     });
 
-    // Gerar token de verificação
-    const verificationToken = novoUsuario.criarTokenVerificacaoEmail();
-    await novoUsuario.save();
-
-    // Enviar email de verificação
-    const verificationURL = `${req.protocol}://${req.get('host')}/api/v1/usuarios/verificarEmail/${verificationToken}`;
-    await emailService.queueEmail(novoUsuario.email, 'verificacaoEmail', { nome: novoUsuario.nome, verificationURL });
-
     const token = generateToken({ id: novoUsuario._id });
 
     res.status(201).json({
@@ -83,76 +73,15 @@ exports.registro = catchAsync(async (req, res, next) => {
 });
 
 exports.verificarEmail = catchAsync(async (req, res, next) => {
-    const { token } = req.params;
-
-    const usuario = await Usuario.findOne({
-        tokenVerificacaoEmail: token,
-        tokenVerificacaoEmailExpiracao: { $gt: Date.now() }
-    });
-
-    if (!usuario) {
-        return next(new AppError('Token inválido ou expirado', 400));
-    }
-
-    usuario.emailVerificado = true;
-    usuario.tokenVerificacaoEmail = undefined;
-    usuario.tokenVerificacaoEmailExpiracao = undefined;
-    await usuario.save();
-
-    res.status(200).json({
-        status: 'success',
-        message: 'Email verificado com sucesso'
-    });
+    return next(new AppError('A verificação de e-mail foi desativada', 400));
 });
 
 exports.esqueciSenha = catchAsync(async (req, res, next) => {
-    const { email } = req.body;
-    const usuario = await Usuario.findOne({ email });
-
-    if (!usuario) {
-        return next(new AppError('Não há usuário com este endereço de email', 404));
-    }
-
-    const resetToken = usuario.criarTokenResetSenha();
-    await usuario.save();
-
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/usuarios/resetarSenha/${resetToken}`;
-    
-    await emailService.queueEmail(usuario.email, 'recuperacaoSenha', { 
-        nomeUsuario: usuario.nome, 
-        resetLink: resetURL 
-    });
-
-    res.status(200).json({
-        status: 'success',
-        message: 'Token enviado para o email'
-    });
+    return next(new AppError('A funcionalidade de recuperação de senha foi desativada', 400));
 });
 
 exports.resetarSenha = catchAsync(async (req, res, next) => {
-    const { token } = req.params;
-    const { senha } = req.body;
-
-    const usuario = await Usuario.findOne({
-        tokenResetSenha: crypto.createHash('sha256').update(token).digest('hex'),
-        tokenResetSenhaExpiracao: { $gt: Date.now() }
-    });
-
-    if (!usuario) {
-        return next(new AppError('Token inválido ou expirado', 400));
-    }
-
-    usuario.senha = senha;
-    usuario.tokenResetSenha = undefined;
-    usuario.tokenResetSenhaExpiracao = undefined;
-    await usuario.save();
-
-    const jwtToken = generateToken({ id: usuario._id });
-
-    res.status(200).json({
-        status: 'success',
-        token: jwtToken
-    });
+    return next(new AppError('A funcionalidade de redefinição de senha foi desativada', 400));
 });
 
 exports.atualizarSenha = catchAsync(async (req, res, next) => {
@@ -176,7 +105,6 @@ exports.atualizarSenha = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = catchAsync(async (req, res) => {
-    // Adicionar o token atual à blacklist
     blacklistToken(req.token);
 
     res.status(200).json({

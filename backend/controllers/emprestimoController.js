@@ -3,7 +3,6 @@ const Livro = require('../models/Livro');
 const Usuario = require('../models/Usuario');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-const { enviarEmailConfirmacao } = require('../utils/email');
 
 exports.realizarEmprestimo = catchAsync(async (req, res) => {
     const { livroId } = req.body;
@@ -34,13 +33,6 @@ exports.realizarEmprestimo = catchAsync(async (req, res) => {
     // Atualiza referências
     usuario.emprestimosAtivos.push(emprestimo._id);
     await usuario.save();
-
-    // Envia email de confirmação
-    await enviarEmailConfirmacao(usuario.email, {
-        livro: livro.titulo,
-        dataEmprestimo: emprestimo.dataEmprestimo,
-        dataDevolucao: emprestimo.dataDevolucaoPrevista
-    });
 
     res.status(201).json({
         status: 'success',
@@ -195,7 +187,7 @@ exports.relatorioEmprestimos = catchAsync(async (req, res) => {
         ativos: emprestimos.filter(e => e.status === 'ATIVO').length,
         devolvidos: emprestimos.filter(e => e.status === 'DEVOLVIDO').length,
         atrasados: emprestimos.filter(e => e.status === 'ATRASADO').length,
-        multasTotal: emprestimos. reduce((acc, e) => acc + (e.multa.valor || 0), 0)
+        multasTotal: emprestimos.reduce((acc, e) => acc + (e.multa.valor || 0), 0)
     };
 
     res.status(200).json({

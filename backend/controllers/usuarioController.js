@@ -1,49 +1,31 @@
 const Usuario = require('../models/Usuario');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-const { enviarEmailConfirmacao } = require('../utils/email');
 
 exports.listarUsuarios = catchAsync(async (req, res) => {
     const usuarios = await Usuario.find().select('-senha');
-
     res.status(200).json({
         status: 'success',
         results: usuarios.length,
-        data: {
-            usuarios
-        }
+        data: { usuarios }
     });
 });
 
 exports.criarUsuario = catchAsync(async (req, res) => {
     const usuario = await Usuario.create(req.body);
-
-    // Envia email de confirmação
-    await enviarEmailConfirmacao(usuario.email, {
-        nome: usuario.nome,
-        email: usuario.email
-    });
-
     res.status(201).json({
         status: 'success',
-        data: {
-            usuario
-        }
+        data: { usuario }
     });
 });
 
 exports.getUsuario = catchAsync(async (req, res) => {
     const usuario = await Usuario.findById(req.params.id).select('-senha');
-
-    if (!usuario) {
-        throw new AppError('Usuário não encontrado', 404);
-    }
+    if (!usuario) throw new AppError('Usuário não encontrado', 404);
 
     res.status(200).json({
         status: 'success',
-        data: {
-            usuario
-        }
+        data: { usuario }
     });
 });
 
@@ -52,21 +34,17 @@ exports.atualizarUsuario = catchAsync(async (req, res) => {
         new: true,
         runValidators: true
     });
-
-    if (!usuario) {
-        throw new AppError('Usuário não encontrado', 404);
-    }
+    if (!usuario) throw new AppError('Usuário não encontrado', 404);
 
     res.status(200).json({
         status: 'success',
-        data: {
-            usuario
-        }
+        data: { usuario }
     });
 });
 
 exports.deletarUsuario = catchAsync(async (req, res) => {
-    await Usuario.findByIdAndDelete(req.params.id);
+    const usuario = await Usuario.findByIdAndDelete(req.params.id);
+    if (!usuario) throw new AppError('Usuário não encontrado', 404);
 
     res.status(204).json({
         status: 'success',
@@ -75,45 +53,21 @@ exports.deletarUsuario = catchAsync(async (req, res) => {
 });
 
 exports.buscarUsuario = catchAsync(async (req, res) => {
-    const { nome, email } = req.query;
-    const filtro = {};
-
-    if (nome ) filtro.nome = { $regex: nome, $options: 'i' };
-    if (email) filtro.email = email;
-
+    const filtro = {
+        ...(req.query.nome && { nome: { $regex: req.query.nome, $options: 'i' } }),
+        ...(req.query.email && { email: req.query.email })
+    };
     const usuarios = await Usuario.find(filtro).select('-senha');
 
     res.status(200).json({
         status: 'success',
         results: usuarios.length,
-        data: {
-            usuarios
-        }
-    });
-});
-
-exports.notificarUsuario = catchAsync(async (req, res) => {
-    const { usuarioId, mensagem } = req.body;
-
-    const usuario = await Usuario.findById(usuarioId);
-    if (!usuario) {
-        throw new AppError('Usuário não encontrado', 404);
-    }
-
-    // Envia notificação para o usuário
-    await usuario.notificar(mensagem);
-
-    res.status(200).json({
-        status: 'success',
-        data: {
-            usuario
-        }
+        data: { usuarios }
     });
 });
 
 exports.login = catchAsync(async (req, res) => {
     const { email, senha } = req.body;
-    // Adicione aqui a lógica de autenticação do usuário
     const usuario = await Usuario.findOne({ email });
     if (!usuario || !(await usuario.compararSenha(senha))) {
         throw new AppError('Credenciais inválidas', 401);
