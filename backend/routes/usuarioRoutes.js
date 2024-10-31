@@ -14,19 +14,14 @@ const createAccountLimiter = rateLimit({
     message: 'Muitas contas criadas a partir deste IP, tente novamente após uma hora',
 });
 
-const updateLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutos
-    max: 10, // limite de 10 atualizações por IP
-    message: 'Muitas tentativas de atualização, tente novamente após 15 minutos',
-});
-
-// Rotas públicas
+// Rota para registrar um novo usuário com limite de criação
 router.post('/registrar', 
     createAccountLimiter, 
     validate.registroUsuario, 
     usuarioController.criarUsuario
 );
 
+// Rota para login com limite de tentativas
 router.post('/login', 
     rateLimit({
         windowMs: 15 * 60 * 1000, // 15 minutos
@@ -40,31 +35,26 @@ router.post('/login',
 // Rotas protegidas - requer autenticação
 router.use(authMiddleware.protect);
 
-// Rotas de usuário
+// Rota para obter perfil do usuário logado com cache de 5 minutos
 router.get('/perfil', 
-    cache(300), // Cache de 5 minutos
+    cache(300), 
     usuarioController.getUsuario
 );
 
-// Rotas administrativas
+// Rotas administrativas - requer privilégios de administrador
 router.use(authMiddleware.restrictTo('admin'));
 
-// Listar, deletar e buscar usuários
+// Rota para listar usuários com cache e validação de parâmetros
 router.get('/', 
-    cache(60), // Cache de 1 minuto
+    cache(60), 
     validate.queryParams(['page', 'limit', 'sort']), 
     usuarioController.listarUsuarios
 );
 
+// Rota para deletar um usuário específico
 router.delete('/:id', 
     validate.params('id'), 
     usuarioController.deletarUsuario
-);
-
-router.get('/buscar', 
-    cache(60), 
-    validate.queryParams(['nome', 'email']), 
-    usuarioController.buscarUsuario
 );
 
 module.exports = router;

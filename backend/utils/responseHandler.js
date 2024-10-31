@@ -1,13 +1,9 @@
-exports.success = (res, data, statusCode = 200) => {
-    res.status(statusCode).json({
-        status: 'success',
-        data
-    });
-};
-
-exports.error = (res, message, statusCode = 400) => {
-    res.status(statusCode).json({
-        status: 'error',
-        message
-    });
-};
+module.exports = {
+    sendSuccess: (res, message, data = null) => {
+      res.status(200).json({ status: 'success', message, data });
+    },
+    sendError: (res, message, statusCode = 500) => {
+      res.status(statusCode).json({ status: 'error', message });
+    }
+  };
+  
