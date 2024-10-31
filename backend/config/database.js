@@ -20,19 +20,9 @@ const connectDB = async () => {
                 console.error('Número máximo de tentativas alcançado. Encerrando o processo.');
                 process.exit(1);
             }
-            await new Promise(res => setTimeout(res, 5000)); // Espera 5 segundos antes da próxima tentativa
+            await new Promise(res => setTimeout(res, 5000));
         }
     }
 };
-
-// Healthcheck para verificar a conexão
-setInterval(async () => {
-    try {
-        await mongoose.connection.db.admin().ping();
-        console.log('MongoDB está ativo.');
-    } catch (error) {
-        console.error('MongoDB não está acessível:', error);
-    }
-}, 60000); // Verifica a cada 60 segundos
 
 module.exports = connectDB;
