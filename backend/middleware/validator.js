@@ -75,9 +75,16 @@ const params = (param) => (req, res, next) => {
     next();
 };
 
+const emprestimo = () => [
+    body('usuarioId').notEmpty().withMessage('O ID do usuário é obrigatório.'),
+    body('livroId').notEmpty().withMessage('O ID do livro é obrigatório.'),
+    handleValidationErrors // Inclui a função de tratamento de erros aqui
+];
+
 module.exports = {
     registroUsuario,
     login,
+    emprestimo,
     validateLivro,
     queryParams,
     params,

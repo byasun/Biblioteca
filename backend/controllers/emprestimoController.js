@@ -116,6 +116,21 @@ exports.listarEmprestimos = catchAsync(async (req, res) => {
     });
 });
 
+exports.listarEmprestimosUsuario = catchAsync(async (req, res) => {
+    const usuarioId = req.user.id;
+    const emprestimos = await Emprestimo.find({ usuario: usuarioId })
+        .populate('usuario', 'nome email matricula')
+        .populate('livro', 'titulo autor isbn');
+
+    res.status(200).json({
+        status: 'success',
+        results: emprestimos.length,
+        data: {
+            emprestimos
+        }
+    });
+});
+
 exports.getEmprestimo = catchAsync(async (req, res) => {
     const emprestimo = await Emprestimo.findById(req.params.id)
         .populate('usuario', 'nome email matricula')

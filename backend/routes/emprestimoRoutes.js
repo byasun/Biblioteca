@@ -2,7 +2,7 @@ const express = require('express');
 const rateLimit = require('express-rate-limit');
 const emprestimoController = require('../controllers/emprestimoController');
 const authMiddleware = require('../middleware/auth');
-const { validate } = require('../middleware/validator');
+const validate = require('../middleware/validator');
 const cache = require('../middleware/cache');
 const logger = require('../utils/logger');
 
