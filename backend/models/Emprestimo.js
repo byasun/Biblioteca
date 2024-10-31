@@ -15,46 +15,40 @@ const emprestimoSchema = new mongoose.Schema({
         type: Date, 
         default: Date.now 
     },
-    dataDevolucao: { 
-        type: Date
-    },
+    dataDevolucao: Date,
     status: {
         type: String,
         enum: ['ATIVO', 'DEVOLVIDO'],
         default: 'ATIVO'
     }
-}, { 
-    timestamps: true
-}); 
+}, { timestamps: true });
 
 // Índices para melhorar a performance de consultas
 emprestimoSchema.index({ usuario: 1, status: 1 });
 emprestimoSchema.index({ livro: 1, status: 1 });
 
 // Métodos do documento
-emprestimoSchema.methods = {
-    devolver() {
-        this.dataDevolucao = new Date();
-        this.status = 'DEVOLVIDO';
-        return this.save();
-    }
+emprestimoSchema.methods.devolver = function() {
+    this.dataDevolucao = new Date();
+    this.status = 'DEVOLVIDO';
+    return this.save();
 };
 
 // Métodos estáticos
 emprestimoSchema.statics = {
-    async findAtivos() {
+    findAtivos: async function() {
         return this.find({ status: 'ATIVO' })
             .populate('usuario', 'nome')
             .populate('livro', 'titulo');
     },
 
-    async findByUsuario(usuarioId) {
+    findByUsuario: async function(usuarioId) {
         return this.find({ usuario: usuarioId })
             .populate('livro', 'titulo')
             .sort('-dataEmprestimo');
     },
 
-    async findByLivro(livroId) {
+    findByLivro: async function(livroId) {
         return this.find({ livro: livroId })
             .populate('usuario', 'nome')
             .sort('-dataEmprestimo');
