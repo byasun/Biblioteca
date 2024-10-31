@@ -1,3 +1,4 @@
+// server.js
 const app = require('./app');
 const logger = require('./backend/utils/logger');
 

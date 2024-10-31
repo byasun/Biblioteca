@@ -22,3 +22,13 @@ exports.notFound = (req, res) => {
         message: 'Recurso não encontrado'
     });
 };
+
+const globalErrorHandler = (err, req, res, next) => {
+    // Lógica para tratar o erro
+    res.status(err.statusCode || 500).json({
+        status: err.status || 'error',
+        message: err.message || 'Erro interno do servidor'
+    });
+};
+
+module.exports = globalErrorHandler;

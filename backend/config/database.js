@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
-const config = require('./config');
+const dotenv = require('dotenv');
+
+dotenv.config(); // Certifique-se de que o dotenv está sendo chamado
 
 const connectDB = async () => {
     let attempts = 0;
     const maxAttempts = 5;
 
+    const mongoUri = process.env.MONGODB_URI;
+    console.log("Mongo URI:", mongoUri);
+
     while (attempts < maxAttempts) {
         try {
-            await mongoose.connect(config.mongoUri, {
+            await mongoose.connect(mongoUri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });

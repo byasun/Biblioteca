@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', false); 
 const dotenv = require('dotenv');
 const usuarioRoutes = require('./backend/routes/usuarioRoutes');
 const livroRoutes = require('./backend/routes/livroRoutes');
@@ -10,6 +11,7 @@ const cors = require('cors');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const logger = require('./backend/utils/logger');
+const connectDB = require('./backend/config/database'); // Ajuste aqui
 
 dotenv.config({ path: './config.env' });
 
@@ -46,18 +48,6 @@ app.get('/health', (req, res) => {
 });
 
 // Conectar ao MongoDB
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.DATABASE, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        logger.info('MongoDB conectado com sucesso!');
-    } catch (err) {
-        logger.error('Erro ao conectar ao MongoDB:', err);
-        process.exit(1);
-    }
-};
 connectDB();
 
 module.exports = app;
