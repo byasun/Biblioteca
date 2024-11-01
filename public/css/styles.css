@@ -1,20 +1,15 @@
 /* Variáveis de cor para fácil manutenção */
 :root {
-    --cor-fundo: #faf7e0;
-    --cor-fundo-2: #fff;
-    --cor-texto: #333;
-    --cor-botao: #8d6e63;
-    --cor-botao-hover: #333;
-    --cor-botao-secundario: #6b8e23;
-    --cor-botao-secundario-hover: #006f34;
-    --cor-header: #f0e4d7;
-    --cor-header-secundario: #9c89b8;
-    --cor-tabela-header: #008542;
-    --cor-destaque: #d0b49f;
-    --cor-alerta: #f44336;
-    --cor-sucesso: #4CAF50;
-    --cor-info: #2196F3;
-    --cor-atencao: #ff9800;
+    --cor-fundo: #d8ecf8;
+    --cor-fundo-form: #cae6f6;
+    --cor-header: #7dc1e9;
+    --cor-texto: #f5f7fa;
+    --cor-texto-form:#1f2933;
+    --cor-texto-botao:#f5f7fa;
+    --cor-texto-botao-hover:#1f2933;
+    --cor-botao: #323f4b;
+    --cor-botao-hover: #9aa5b1;
+
 }
 
 /* Reset básico */
@@ -43,7 +38,7 @@ header {
     color: var(--cor-texto);
     padding: 20px;
     text-align: center;
-    border-radius: 0%;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
@@ -62,22 +57,23 @@ nav {
     margin: 20px 0;
     padding: 10px;
     background-color: var(--cor-fundo);
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 nav button {
     background-color: var(--cor-botao);
-    color: white;
+    color: var(--cor-texto-botao);
     font-size: 18px;
     padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 nav button:hover {
     background-color: var(--cor-botao-hover);
+    color: var(--cor-texto-botao-hover);
 }
 
 main {
@@ -99,7 +95,7 @@ form {
     max-width: 500px;
     margin: 20px auto;
     padding: 20px;
-    background-color: var(--cor-fundo-2);
+    background-color: var(--cor-fundo-form);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -108,7 +104,7 @@ form {
 form label {
     display: block;
     font-weight: bold;
-    color: var(--cor-texto);
+    color: var(--cor-texto-form);
     margin-bottom: 5px;
 }
 
@@ -122,7 +118,7 @@ form input[type="date"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #bbb;
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
@@ -138,7 +134,7 @@ form input[type="date"]:focus {
 /* Botões de Formulário (com classe comum) */
 form button {
     background-color: var(--cor-botao);
-    color: white;
+    color: var(--cor-texto-botao);
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
@@ -151,6 +147,7 @@ form button {
 
 form button:hover {
     background-color: var(--cor-botao-hover);
+    color: var(--cor-texto-botao-hover)
 }
 
 /* Mensagem de Erro */
@@ -168,13 +165,12 @@ form button:hover {
     margin-top: 15px; /* Espaço entre os campos e os botões */
 }
 
-/* Garantir que os botões sejam responsivos e tenham a mesma largura */
 .form-buttons button {
-    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+    flex: 1;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 999px) {
     nav {
         flex-direction: column;
     }
