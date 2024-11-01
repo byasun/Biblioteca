@@ -1,22 +1,20 @@
 /* Variáveis de cor para fácil manutenção */
 :root {
     --cor-fundo: #faf7e0;
+    --cor-fundo-2: #fff;
     --cor-texto: #333;
     --cor-botao: #8d6e63;
     --cor-botao-hover: #333;
     --cor-botao-secundario: #6b8e23;
     --cor-botao-secundario-hover: #006f34;
     --cor-header: #f0e4d7;
-    --cor-header-secundario: #9c89b8; /* nova cor para cabeçalho secundário */
+    --cor-header-secundario: #9c89b8;
     --cor-tabela-header: #008542;
-    --cor-destaque: #d0b49f; /* nova cor para destaque */
+    --cor-destaque: #d0b49f;
     --cor-alerta: #f44336;
     --cor-sucesso: #4CAF50;
     --cor-info: #2196F3;
     --cor-atencao: #ff9800;
-    --cor-botao-acao: #8d6e63; /* nova cor para botões de ação */
-    --cor-botao-principal: #f0a500; /* nova cor para botões principais */
-    --cor-fundo-alternativo: #fff8e1; /* nova cor para fundo alternativo */
 }
 
 /* Reset básico */
@@ -28,6 +26,10 @@
 
 /* Corpo da página */
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
     font-family: Arial, sans-serif;
     line-height: 2;
     background-color: var(--cor-fundo);
@@ -41,136 +43,148 @@ header {
     color: var(--cor-texto);
     padding: 20px;
     text-align: center;
+    border-radius: 0%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 header h1 {
+    font-size: 2em;
     margin: 0;
-}
-
-/* Botões */
-button {
-    background-color: var(--cor-botao);
-    color: #f1f1f1;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 20px;
-    margin: 10px;
-    border-radius: 15px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: var(--cor-botao-hover);
-}
-
-/* Botões de Ação */
-.menu-botoes button {
-    background-color: var(--cor-botao-acao); /* Botões de ação com nova cor */
-    color: var(--cor-texto);
-}
-
-/* Formulários */
-form {
-    max-width: 600px;
-    margin: 20px auto;
-    background: var(--cor-fundo-alternativo); /* Fundo alternativo para o formulário */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-form input, form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form button {
-    width: 100%;
-    background-color: var(--cor-botao-secundario);
-    padding: 10px;
-    border-radius: 5px;
-}
-
-form button:hover {
-    background-color: var(--cor-botao-secundario-hover);
-}
-
-/* Tabelas */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-table th {
-    background-color: var(--cor-tabela-header);
-    color: white;
-}
-
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Alertas */
-.alerta {
-    padding: 20px;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.alerta.sucesso {
-    background-color: var(--cor-sucesso);
-}
-
-.alerta.info {
-    background-color: var(--cor-info);
-}
-
-.alerta.atencao {
-    background-color: var(--cor-atencao);
-}
-
-nav .menu-botoes {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.menu-botoes button {
-    margin: 15px; /* Adiciona espaçamento entre os botões */
 }
 
 /* Navegação */
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: var(--cor-fundo);
+    border-radius: 8px;
 }
 
+nav button {
+    background-color: var(--cor-botao);
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+main {
+    flex: 1;
+}
+
+/* Rodapé */
+footer {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    width: 100%;
+}
+
+/* Formulário Principal */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--cor-fundo-2);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Rótulos do Formulário */
+form label {
+    display: block;
+    font-weight: bold;
+    color: var(--cor-texto);
+    margin-bottom: 5px;
+}
+
+/* Campos de Entrada */
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="password"],
+form select,
+form input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form select:focus,
+form input[type="date"]:focus {
+    border-color: var(--cor-botao-secundario);
+    outline: none;
+}
+
+/* Botões de Formulário (com classe comum) */
+form button {
+    background-color: var(--cor-botao);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+    margin: 0 5px; /* Espaçamento entre os botões */
+}
+
+form button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Mensagem de Erro */
+.form-error {
+    color: var(--cor-alerta);
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Centralizar os botões dentro do formulário */
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; /* Espaço entre os campos e os botões */
+}
+
+/* Garantir que os botões sejam responsivos e tenham a mesma largura */
+.form-buttons button {
+    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    nav ul {
+    nav {
         flex-direction: column;
     }
-    form input, form select, form button, button {
+
+    nav button {
         width: 100%;
+        margin-bottom: 10px;
+    }
+
+    form {
+        width: 90%;
     }
 }
