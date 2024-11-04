@@ -13,8 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const result = await serviceMethod(data);
-            alert(`Cadastro realizado com sucesso: ${result.data.nome || result.data.titulo || 'Empréstimo registrado'}`);
-            formulario.reset();
+            if (result.status === 'success') {
+                alert(`Cadastro realizado com sucesso: ${result.data.nome || result.data.titulo || 'Empréstimo registrado'}`);
+                formulario.reset();
+                window.location.href = 'index.html'; // Redireciona para a página principal
+            } else {
+                alert(`Erro: ${result.message || 'Ocorreu um erro no cadastro'}`);
+            }
         } catch (error) {
             console.error(`Erro ao cadastrar: ${error.message}`);
             alert(`Erro ao cadastrar: ${error.message}`);
