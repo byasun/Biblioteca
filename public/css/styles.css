@@ -1,14 +1,14 @@
 /* Variáveis de cor para fácil manutenção */
 :root {
-    --cor-fundo: #d8ecf8;
-    --cor-fundo-form: #cae6f6;
-    --cor-header: #7dc1e9;
-    --cor-texto: #f5f7fa;
-    --cor-texto-form:#1f2933;
-    --cor-texto-botao:#f5f7fa;
-    --cor-texto-botao-hover:#1f2933;
-    --cor-botao: #323f4b;
-    --cor-botao-hover: #9aa5b1;
+    --cor-fundo: #f4f9fd;
+    --cor-fundo-form: #e6f1fa;
+    --cor-header: #9bc6ec;
+    --cor-texto: #0f3352;
+    --cor-texto-form:#05111b;
+    --cor-texto-botao:#e6f1fa;
+    --cor-texto-botao-hover:#e6f1fa;
+    --cor-botao: #2c88d8;
+    --cor-botao-hover: #5ca3e1;
 
 }
 
@@ -39,7 +39,7 @@ header {
     padding: 20px;
     text-align: center;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
