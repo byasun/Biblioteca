@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(url, {
+            const response = await fetch(`https://biblioteca-regap-7049125ed8fd.herokuapp.com${url}`, { // URL completa da API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) throw new Error('Erro na resposta do servidor');
 
             const result = await response.json();
-            alert(`Cadastro realizado com sucesso: ${result.nome || result.titulo}`);
+            alert(`Cadastro realizado com sucesso: ${result.data.nome || result.data.titulo}`);
             formulario.reset(); // Reseta o formulário após o envio
         } catch (error) {
             console.error(`Erro ao cadastrar: ${error.message}`);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formularioUsuario.addEventListener('submit', function (e) {
             e.preventDefault();
             if (!validarFormularioUsuario()) return; // Chama a validação
-            enviarFormulario(formularioUsuario, '/api/usuarios'); // Chama a função de envio
+            enviarFormulario(formularioUsuario, '/api/v1/usuarios/registrar'); // URL completa da rota de cadastro
         });
     }
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formularioLivro.addEventListener('submit', function (e) {
             e.preventDefault();
             if (!validarFormularioLivro()) return; // Chama a validação
-            enviarFormulario(formularioLivro, '/api/livros'); // Chama a função de envio
+            enviarFormulario(formularioLivro, '/api/v1/livros'); // URL completa da rota de livros
         });
     }
 
