@@ -1,26 +1,20 @@
+// URL base da API
+const BASE_API_URL = 'https://biblioteca-regap-7049125ed8fd.herokuapp.com/api/v1';
+
 document.addEventListener('DOMContentLoaded', function () {
     const formularioUsuario = document.getElementById('formUsuario');
     const formularioLivro = document.getElementById('formLivro');
+    const formularioEmprestimo = document.getElementById('formEmprestimo');
 
-    // Função genérica para enviar formulário
-    async function enviarFormulario(formulario, url) {
+    // Função genérica para enviar formulários
+    async function enviarFormulario(formulario, serviceMethod) {
         const formData = new FormData(formulario);
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(`https://biblioteca-regap-7049125ed8fd.herokuapp.com${url}`, { // URL completa da API
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) throw new Error('Erro na resposta do servidor');
-
-            const result = await response.json();
-            alert(`Cadastro realizado com sucesso: ${result.data.nome || result.data.titulo}`);
-            formulario.reset(); // Reseta o formulário após o envio
+            const result = await serviceMethod(data);
+            alert(`Cadastro realizado com sucesso: ${result.data.nome || result.data.titulo || 'Empréstimo registrado'}`);
+            formulario.reset();
         } catch (error) {
             console.error(`Erro ao cadastrar: ${error.message}`);
             alert(`Erro ao cadastrar: ${error.message}`);
@@ -31,8 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (formularioUsuario) {
         formularioUsuario.addEventListener('submit', function (e) {
             e.preventDefault();
-            if (!validarFormularioUsuario()) return; // Chama a validação
-            enviarFormulario(formularioUsuario, '/api/v1/usuarios/registrar'); // URL completa da rota de cadastro
+            enviarFormulario(formularioUsuario, UsuarioService.cadastrar);
         });
     }
 
@@ -40,15 +33,22 @@ document.addEventListener('DOMContentLoaded', function () {
     if (formularioLivro) {
         formularioLivro.addEventListener('submit', function (e) {
             e.preventDefault();
-            if (!validarFormularioLivro()) return; // Chama a validação
-            enviarFormulario(formularioLivro, '/api/v1/livros'); // URL completa da rota de livros
+            enviarFormulario(formularioLivro, LivroService.cadastrar);
+        });
+    }
+
+    // Evento de envio do formulário de empréstimo
+    if (formularioEmprestimo) {
+        formularioEmprestimo.addEventListener('submit', function (e) {
+            e.preventDefault();
+            enviarFormulario(formularioEmprestimo, EmprestimoService.registrar);
         });
     }
 
     // Evento de clique nos botões de menu
     const menuBotoes = document.querySelectorAll('.menu-botao');
     menuBotoes.forEach(botao => {
-        botao.addEventListener('click', function() {
+        botao.addEventListener('click', function () {
             const url = this.getAttribute('data-url');
             window.location.href = url;
         });
