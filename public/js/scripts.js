@@ -59,6 +59,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Exemplo de serviço para cadastrar usuário
+const UsuarioService = {
+    async cadastrar(data) {
+        const response = await fetch(`${BASE_API_URL}/usuarios`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        return response.json();
+    }
+};
+
+// Código para o carrossel de imagens e o toggle do menu
 let currentIndex = 0;
 const images = document.querySelectorAll('.carousel-image');
 const totalImages = images.length;
