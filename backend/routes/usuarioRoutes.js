@@ -16,7 +16,8 @@ const createAccountLimiter = rateLimit({
 
 // Rota para registrar um novo usuário com limite de criação
 router.post('/registrar', 
-    createAccountLimiter, 
+    createAccountLimiter,
+    validate.registroUsuario, 
     usuarioController.criarUsuario
 );
 
@@ -33,9 +34,6 @@ router.post('/login',
 
 // Rota para obter perfil do usuário logado com cache de 5 minutos
 router.get('/perfil', cache(300), usuarioController.getUsuario);
-
-// Rotas administrativas - requer privilégios de administrador
-router.use(authMiddleware.restrictTo('admin'));
 
 // Rota para listar usuários com cache e validação de parâmetros
 router.get('/', 
