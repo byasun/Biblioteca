@@ -17,7 +17,6 @@ const createAccountLimiter = rateLimit({
 // Rota para registrar um novo usuário com limite de criação
 router.post('/registrar', 
     createAccountLimiter, 
-    validate.registroUsuario, 
     usuarioController.criarUsuario
 );
 
