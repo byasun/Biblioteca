@@ -60,7 +60,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+let currentIndex = 0;
+const images = document.querySelectorAll('.carousel-image');
+const totalImages = images.length;
+
+function showNextImage() {
+    images[currentIndex].style.display = 'none'; // Oculta a imagem atual
+    currentIndex = (currentIndex + 1) % totalImages; // Atualiza o índice
+    images[currentIndex].style.display = 'block'; // Exibe a próxima imagem
+}
+
+function showPreviousImage() {
+    images[currentIndex].style.display = 'none'; // Oculta a imagem atual
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages; // Atualiza o índice
+    images[currentIndex].style.display = 'block'; // Exibe a imagem anterior
+}
+
+// Inicializa a galeria
+images.forEach((img, index) => {
+    img.style.display = index === 0 ? 'block' : 'none'; // Mostra apenas a primeira imagem
+});
+
+
+// Função para alternar o menu
 function toggleMenu() {
-    const menu = document.querySelector('.main-menu');
-    menu.classList.toggle('visible');
+    const menu = document.getElementById("menu-dropdown");
+    menu.classList.toggle("show");
 }

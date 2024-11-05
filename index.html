@@ -33,17 +33,24 @@
     </header>
 
     <main>
-        <section class="carousel">
-            <div class="carousel-image">
-                <img src="public\imagens\fundo.png" alt="Banner 1">
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-image">
+                    <img src="public\imagens\fundo.png" alt="Imagem 1">
+                </div>
+                <div class="carousel-image">
+                    <img src="public\imagens\fundo.png" alt="Imagem 2">
+                </div>
+                <div class="carousel-image">
+                    <img src="public\imagens\fundo.png" alt="Imagem 3">
+                </div>
+                <button class="carousel-button left" onclick="showPreviousImage()">&#10094;</button>
+                <button class="carousel-button right" onclick="showNextImage()">&#10095;</button>
             </div>
-            <div class="carousel-image">
-                <img src="public\imagens\fundo.png" alt="Banner 2">
-            </div>
-            <div class="carousel-image">
-                <img src="public\imagens\fundo.png" alt="Banner 3">
-            </div>
-        </section>
+        </div>
+        
+        
+        
 
         <section class="text-image-section">
             <div class="text-column">
@@ -60,12 +67,6 @@
         <p>&copy; 2024 Biblioteca Comunitária</p>
     </footer>
 
-    <script src="/js/scripts.js"></script>
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menu-dropdown");
-            menu.classList.toggle("show");
-        }
-    </script>
+    <script src="public\js\scripts.js"></script>
 </body>
 </html>

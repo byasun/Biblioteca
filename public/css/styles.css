@@ -42,15 +42,17 @@ header {
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centraliza o texto horizontalmente */
     width: 100%;
     box-sizing: border-box;
     position: fixed;
-    top: 50px; /* Posicionado logo abaixo da barra de navegação */
+    top: 70px; /* Posiciona logo abaixo da barra de navegação */
     left: 0;
     z-index: 999; /* Fica abaixo da barra de navegação */
-    border-radius: 0; /* Remover bordas arredondadas */
+    border-radius: 0; /* Remove bordas arredondadas */
+    text-align: center; /* Garante que o conteúdo do texto fique centralizado */
 }
+
 
 h2{
     color: var(--cor-texto-h2);
@@ -58,7 +60,7 @@ h2{
 
 /* Ajuste do conteúdo da página para compensar a barra de navegação e o cabeçalho */
 body {
-    padding-top: 140px; /* Considera a altura da navbar e do header */
+    padding-top: 170px; /* Considera a altura da navbar e do header */
 }
 
 /* Barra de navegação */
@@ -100,7 +102,7 @@ body {
 
 /* Logo da barra de navegação */
 .logo {
-    height: 40px;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -220,25 +222,62 @@ body {
     display: block;
 }
 
-/* Carrossel de Imagens */
-.carousel {
+/* Contêiner da Galeria */
+.carousel-container {
+    background-color: var(--cor-fundo-form);
     width: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza a galeria horizontalmente */
+}
+
+/* Estilos do Carrossel */
+.carousel {
+    position: relative;
+    background-color: var(--cor-fundo-form);
+    width: 50%; /* Você pode ajustar a largura como necessário */
     overflow: hidden;
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .carousel-image {
     flex: 1;
     max-width: 100%;
+    display: none; /* Oculta todas as imagens inicialmente */
 }
 
 .carousel img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
+    border-radius: 4px;
+}
+
+.carousel-image:first-child {
+    display: block; /* Mostra a primeira imagem */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 24px;
+}
+
+.carousel-button.left {
+    left: 10px;
+}
+
+.carousel-button.right {
+    right: 10px;
 }
 
 /* Seção de Texto e Imagem */
@@ -363,6 +402,7 @@ form button {
     transition: background-color 0.3s ease;
     flex: 1;
     margin: 0 5px;
+    
 }
 
 form button:hover {
@@ -384,6 +424,7 @@ form button:hover {
     justify-content: center;
     margin-top: 15px;
 }
+
 
 /* Rodapé */
 footer {
