@@ -18,7 +18,7 @@ const createAccountLimiter = rateLimit({
 router.post('/registrar', 
     createAccountLimiter, 
     validate.registroUsuario, 
-    usuarioController.criarUsuario
+    usuarioController.criarUsuario // Esta rota não precisa do middleware authMiddleware
 );
 
 // Rota para login com limite de tentativas
