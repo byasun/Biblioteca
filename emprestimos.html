@@ -14,7 +14,7 @@
             </a>
         </div>
         <div class="navbar-center">
-            <h2>Retirar Livro</h2>
+            <h2 id="toggleLabel">Retirar Livro</h2>
         </div>
         <div class="navbar-right">
             <button class="menu-button" onclick="toggleMenu()">☰</button>
@@ -23,25 +23,38 @@
             </div>
         </div>
     </nav>
+
+    <div class="toggle-section">
+        <div class="toggle-text">
+            <span>Pegar</span>
+            <span>Devolver</span>
+        </div>
+        <div class="toggle-slider" id="toggleSlider">
+            <div class="toggle-button"></div>
+        </div>
+    </div>
+    
+    
     <form id="formEmprestimo">
         <label for="usuario">Usuário:</label>
         <select id="usuario" name="usuario" required>
             <!-- Preencher com usuários disponíveis -->
         </select>
-
+    
         <label for="livro">Livro:</label>
         <select id="livro" name="livro" required>
             <!-- Preencher com livros disponíveis -->
         </select>
-
+    
         <label for="dataEmprestimo">Data do Empréstimo:</label>
         <input type="date" id="dataEmprestimo" name="dataEmprestimo" required>
-
+    
         <div class="form-buttons">
             <button type="submit">Registrar</button>
-            <button type="button" onclick="window.location.href='index.html'">Voltar</button>
+            <button type="button" onclick="window.location.href='usuario.html'">Voltar</button>
         </div>
     </form>
+    
     <script src="public\js\scripts.js"></script>    
 </body>
 </html>

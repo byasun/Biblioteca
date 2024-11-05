@@ -85,3 +85,25 @@ function toggleMenu() {
     const menu = document.getElementById("menu-dropdown");
     menu.classList.toggle("show");
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleSlider = document.getElementById('toggleSlider');
+    const toggleLabel = document.getElementById('toggleLabel'); // Para o texto da barra de navegação
+    const textPegar = document.getElementById('textPegar');
+    const textDevolver = document.getElementById('textDevolver');
+
+    toggleSlider.addEventListener('click', () => {
+        toggleSlider.classList.toggle('checked');
+
+        // Verifica o estado do toggle e altera o texto correspondente
+        if (toggleSlider.classList.contains('checked')) {
+            toggleLabel.textContent = "Devolver Livro"; // Altera o texto na barra de navegação
+            textPegar.style.display = 'none'; // Oculta o texto "Pegar"
+            textDevolver.style.display = 'block'; // Mostra o texto "Devolver"
+        } else {
+            toggleLabel.textContent = "Pegar Livro"; // Altera o texto na barra de navegação
+            textPegar.style.display = 'block'; // Mostra o texto "Pegar"
+            textDevolver.style.display = 'none'; // Oculta o texto "Devolver"
+        }
+    });
+});

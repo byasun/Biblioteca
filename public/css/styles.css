@@ -431,6 +431,56 @@ form button:hover {
     margin-top: 15px;
 }
 
+/* Seção do Toggle */
+.toggle-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Texto do Toggle */
+.toggle-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* Toggle Slider */
+.toggle-slider {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.toggle-slider.checked {
+    background-color: var(--cor-botao); /* Cor quando está selecionado */
+}
+
+.toggle-slider .toggle-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Movimenta o botão deslizante ao ser ativado */
+.toggle-slider.checked .toggle-button {
+    transform: translateX(60px);
+}
 
 /* Rodapé */
 footer {
