@@ -1,4 +1,3 @@
-// URL base da API
 const BASE_API_URL = 'https://biblioteca-regap-7049125ed8fd.herokuapp.com/api/v1';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -80,7 +79,6 @@ function showPreviousImage() {
 images.forEach((img, index) => {
     img.style.display = index === 0 ? 'block' : 'none'; // Mostra apenas a primeira imagem
 });
-
 
 // Função para alternar o menu
 function toggleMenu() {
