@@ -7,23 +7,65 @@
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <img src="public/imagens/NTD.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="navbar-center">
+            <input type="text" placeholder="Pesquisar..." class="search-bar">
+            <button class="search-button">
+                <img src="public\imagens\vecteezy_investigation-png-icon-isolated-on-transparent-background_14391881.png" alt="Pesquisar" class="button-icon">
+            </button>
+        </div>
+        <div class="navbar-right">
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button type="button" onclick="window.location.href='login.html'">Fazer Login</button>
+                <button type="button" onclick="window.location.href='livros.html'">Doar Livros</button>
+            </div>
+        </div>
+    </nav>
+
     <header>
-        <h1>Bem-vindo à Biblioteca Comunitária</h1>
+        <h1>Bem-vindo à Biblioteca da REGAP</h1>
     </header>
+
     <main>
-        <nav>
-            <button type="button" onclick="window.location.href='cadastro.html'">Cadastrar Usuário</button>
-            <button type="button" onclick="window.location.href='livros.html'">Doar Livro</button>
-            <button type="button" onclick="window.location.href='emprestimos.html'">Pegar Livro</button>
-            <button type="button" onclick="window.location.href='emprestimos.html'">Devolver Livro</button>
-            <button type="button" onclick="window.location.href='livros.html'">Visualizar Livros</button>
-            <button type="button" onclick="window.location.href='emprestimos.html'">Visualizar Empréstimos</button>
-        </nav>
+        <section class="carousel">
+            <div class="carousel-image">
+                <img src="public\imagens\fundo.png" alt="Banner 1">
+            </div>
+            <div class="carousel-image">
+                <img src="public\imagens\fundo.png" alt="Banner 2">
+            </div>
+            <div class="carousel-image">
+                <img src="public\imagens\fundo.png" alt="Banner 3">
+            </div>
+        </section>
+
+        <section class="text-image-section">
+            <div class="text-column">
+                <h2>Sobre a Biblioteca Comunitária</h2>
+                <p>Bem-vindo à nossa Biblioteca Comunitária, um espaço dedicado à leitura, aprendizado e troca de conhecimento. Aqui, você pode doar livros, emprestar títulos para sua leitura e contribuir para um ambiente de compartilhamento cultural.</p>
+            </div>
+            <div class="image-column">
+                <img src="public\imagens\fundo.png" alt="Imagem da Biblioteca" class="section-image">
+            </div>
+        </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Biblioteca Comunitária</p>
     </footer>
 
     <script src="/js/scripts.js"></script>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu-dropdown");
+            menu.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>

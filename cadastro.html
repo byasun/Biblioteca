@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Cadastrar Usuário</h1>
-    </header>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <img src="public\imagens\NTD.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="navbar-center">
+            <h2>Novo Usuário</h2>
+        </div>
+        <div class="navbar-right">
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button type="button" onclick="window.location.href='livros.html'">Doar Livros</button>
+            </div>
+        </div>
+    </nav>
 
     <form id="formUsuario">
         <label for="nome">Nome Completo:</label>
@@ -35,5 +48,11 @@
         </form>
 
     <script src="/js/scripts.js"></script>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu-dropdown");
+            menu.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>

@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Cadastrar Livro</h1>
-    </header>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <img src="public\imagens\NTD.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="navbar-center">
+            <h2>Doar Livro</h2>
+        </div>
+        <div class="navbar-right">
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button type="button" onclick="window.location.href='livros.html'">Doar Livros</button>
+            </div>
+        </div>
+    </nav>
 
     <form id="formLivro">
         <label for="titulo">Título:</label>

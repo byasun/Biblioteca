@@ -1,15 +1,17 @@
 /* Variáveis de cor para fácil manutenção */
 :root {
-    --cor-fundo: #f4f9fd;
-    --cor-fundo-form: #e6f1fa;
-    --cor-header: #9bc6ec;
-    --cor-texto: #0f3352;
-    --cor-texto-form:#05111b;
-    --cor-texto-botao:#e6f1fa;
-    --cor-texto-botao-hover:#e6f1fa;
-    --cor-botao: #2c88d8;
-    --cor-botao-hover: #5ca3e1;
-
+    --cor-fundo: #dfedf9;
+    --cor-fundo-form: #cbe1f5;
+    --cor-header: #2680ce;
+    --cor-texto: #edf5fb;
+    --cor-texto-h2: #071929;
+    --cor-texto-form: #081d30;
+    --cor-texto-botao: #e6f1fa;
+    --cor-texto-botao-hover: #e6f1fa;
+    --cor-botao: #2680ce;
+    --cor-botao-hover: #1f6aac;
+    --cor-fundo-navbar: #fff;
+    --cor-bordas: #2273ba;
 }
 
 /* Reset básico */
@@ -37,16 +39,259 @@ header {
     background-color: var(--cor-header);
     color: var(--cor-texto);
     padding: 20px;
-    text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 50px; /* Posicionado logo abaixo da barra de navegação */
+    left: 0;
+    z-index: 999; /* Fica abaixo da barra de navegação */
+    border-radius: 0; /* Remover bordas arredondadas */
 }
 
-header h1 {
-    font-size: 2em;
-    margin: 0;
+h2{
+    color: var(--cor-texto-h2);
 }
+
+/* Ajuste do conteúdo da página para compensar a barra de navegação e o cabeçalho */
+body {
+    padding-top: 140px; /* Considera a altura da navbar e do header */
+}
+
+/* Barra de navegação */
+.navbar {
+    background-color: var(--cor-fundo-navbar);
+    color: var(--cor-texto-botao);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-radius: 0; /* Remove bordas arredondadas */
+}
+
+
+/* Elementos da barra de navegação */
+.navbar-left, .navbar-center, .navbar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    justify-content: flex-start;
+}
+
+.navbar-center {
+    justify-content: center;
+}
+
+.navbar-right {
+    justify-content: flex-end;
+}
+
+/* Logo da barra de navegação */
+.logo {
+    height: 40px;
+    cursor: pointer;
+}
+
+/* Barra de pesquisa */
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    font-size: 16px;
+    border: 0.5px  solid var(--cor-bordas);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* Botão de pesquisa */
+.search-button {
+    background-color: var(--cor-botao);
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.search-button img.button-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Botão de menu flutuante */
+.menu-button {
+    background-color: var(--cor-botao);
+    color: var(--cor-texto-botao);
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.menu-button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Menu principal (visível ao clicar no botão de menu flutuante) */
+.main-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: var(--cor-fundo);
+    padding: 0px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.main-menu.visible {
+    display: block;
+}
+
+.main-menu button {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--cor-texto);
+    background-color: var(--cor-botao);
+    border: none;
+    padding: 0px;
+    text-align: left;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.main-menu button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Menu Flutuante */
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: var(--cor-fundo-form);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.menu-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--cor-botao);
+    color: var(--cor-texto-botao);
+    text-align: left;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.menu-dropdown button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Exibir o menu flutuante quando a classe 'show' é adicionada */
+.show {
+    display: block;
+}
+
+/* Carrossel de Imagens */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.carousel-image {
+    flex: 1;
+    max-width: 100%;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Seção de Texto e Imagem */
+.text-image-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.text-column {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.text-column h2 {
+    color: var(--cor-texto-h2);
+    margin-bottom: 10px;
+}
+
+.text-column p {
+    color: var(--cor-texto-form);
+    line-height: 1.6;
+}
+
+.image-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-column img.section-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Responsividade para Telas Menores */
+@media (max-width: 768px) {
+    .text-image-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carousel {
+        flex-direction: column;
+    }
+}
+
 
 /* Navegação */
 nav {
@@ -54,12 +299,13 @@ nav {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    margin: 20px 0;
+    margin: 0px 0;
     padding: 10px;
     background-color: var(--cor-fundo);
     border-radius: 10px;
 }
 
+/* Botões de navegação */
 nav button {
     background-color: var(--cor-botao);
     color: var(--cor-texto-botao);
@@ -76,21 +322,7 @@ nav button:hover {
     color: var(--cor-texto-botao-hover);
 }
 
-main {
-    flex: 1;
-}
-
-/* Rodapé */
-footer {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    text-align: center;
-    padding: 10px 20px;
-    position: relative;
-    width: 100%;
-}
-
-/* Formulário Principal */
+/* Formulários */
 form {
     max-width: 500px;
     margin: 20px auto;
@@ -100,7 +332,7 @@ form {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Rótulos do Formulário */
+/* Rótulos do formulário */
 form label {
     display: block;
     font-weight: bold;
@@ -108,7 +340,7 @@ form label {
     margin-bottom: 5px;
 }
 
-/* Campos de Entrada */
+/* Campos de entrada do formulário */
 form input[type="text"],
 form input[type="email"],
 form input[type="tel"],
@@ -127,11 +359,11 @@ form input[type="date"] {
 form input:focus,
 form select:focus,
 form input[type="date"]:focus {
-    border-color: var(--cor-botao-secundario);
+    border-color: var(--cor-botao);
     outline: none;
 }
 
-/* Botões de Formulário (com classe comum) */
+/* Botões do formulário */
 form button {
     background-color: var(--cor-botao);
     color: var(--cor-texto-botao);
@@ -141,32 +373,38 @@ form button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
-    margin: 0 5px; /* Espaçamento entre os botões */
+    flex: 1;
+    margin: 0 5px;
 }
 
 form button:hover {
     background-color: var(--cor-botao-hover);
-    color: var(--cor-texto-botao-hover)
+    color: var(--cor-texto-botao-hover);
 }
 
-/* Mensagem de Erro */
+/* Mensagem de erro */
 .form-error {
-    color: var(--cor-alerta);
+    color: #d9534f;
     font-size: 14px;
     margin-top: -10px;
     margin-bottom: 10px;
 }
 
-/* Centralizar os botões dentro do formulário */
+/* Centralizar botões no formulário */
 .form-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 15px; /* Espaço entre os campos e os botões */
+    margin-top: 15px;
 }
 
-.form-buttons button {
-    flex: 1;
+/* Rodapé */
+footer {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    text-align: center;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: auto; /* Permite que o rodapé fique no final da página */
 }
 
 /* Responsividade */
