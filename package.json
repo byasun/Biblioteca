@@ -30,7 +30,7 @@
         "nodemon": "^3.1.7"
     },
     "engines": {
-        "node": "14.x"
+        "node": "16.x"
     },
     "author": "Anna Clara Gomes Silva Sousa",
     "license": "MIT"
