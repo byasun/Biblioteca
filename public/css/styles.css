@@ -12,6 +12,7 @@
     --cor-botao-hover: #1f6aac;
     --cor-fundo-navbar: #fff;
     --cor-bordas: #2273ba;
+    --cor-texto-footer: #000;
 }
 
 /* Reset básico */
@@ -280,19 +281,6 @@ body {
     border-radius: 8px;
 }
 
-/* Responsividade para Telas Menores */
-@media (max-width: 768px) {
-    .text-image-section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .carousel {
-        flex-direction: column;
-    }
-}
-
-
 /* Navegação */
 nav {
     display: flex;
@@ -400,25 +388,44 @@ form button:hover {
 /* Rodapé */
 footer {
     background-color: var(--cor-fundo);
-    color: var(--cor-texto);
+    color: var(--cor-texto-footer);
     text-align: center;
     padding: 10px 20px;
     width: 100%;
     margin-top: auto; /* Permite que o rodapé fique no final da página */
 }
 
-/* Responsividade */
-@media (max-width: 999px) {
-    nav {
+/* Responsividade para Telas Menores */
+@media (max-width: 768px) {
+    /* Carrossel */
+    .carousel {
         flex-direction: column;
+        gap: 5px;
     }
 
-    nav button {
-        width: 100%;
-        margin-bottom: 10px;
+    /* Seção de Texto e Imagem */
+    .text-image-section {
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
     }
 
-    form {
-        width: 90%;
+    .text-column,
+    .image-column {
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .text-column h2 {
+        font-size: 1.5em;
+    }
+
+    .text-column p {
+        font-size: 1em;
+    }
+
+    .image-column img.section-image {
+        max-width: 100%;
+        height: auto;
     }
 }
