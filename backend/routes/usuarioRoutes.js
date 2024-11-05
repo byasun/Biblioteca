@@ -18,7 +18,7 @@ const createAccountLimiter = rateLimit({
 router.post('/registrar', 
     createAccountLimiter, 
     validate.registroUsuario, 
-    usuarioController.criarUsuario // Esta rota não precisa do middleware authMiddleware
+    usuarioController.criarUsuario
 );
 
 // Rota para login com limite de tentativas
@@ -32,14 +32,8 @@ router.post('/login',
     usuarioController.login
 );
 
-// Rotas protegidas - requer autenticação
-router.use(authMiddleware.protect);
-
 // Rota para obter perfil do usuário logado com cache de 5 minutos
-router.get('/perfil', 
-    cache(300), 
-    usuarioController.getUsuario
-);
+router.get('/perfil', cache(300), usuarioController.getUsuario);
 
 // Rotas administrativas - requer privilégios de administrador
 router.use(authMiddleware.restrictTo('admin'));
