@@ -12,6 +12,15 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const logger = require('./backend/utils/logger');
 const connectDB = require('./backend/config/database'); // Ajuste aqui
+const path = require('path');
+
+// Middleware para servir arquivos estáticos da pasta "public"
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Qualquer rota não capturada será redirecionada para o index.html do frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 dotenv.config({ path: './config.env' });
 

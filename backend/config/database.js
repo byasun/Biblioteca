@@ -6,25 +6,26 @@ dotenv.config(); // Certifique-se de que o dotenv está sendo chamado
 const connectDB = async () => {
     let attempts = 0;
     const maxAttempts = 5;
-
-    const mongoUri = process.env.MONGODB_URI;
+    const mongoUri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
 
     while (attempts < maxAttempts) {
         try {
             await mongoose.connect(mongoUri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
+                useCreateIndex: true
             });
-            console.log('MongoDB conectado com sucesso!');
-            return;
+            console.log('Conectado ao Azure Cosmos DB com sucesso');
+            break; // Sai do loop em caso de sucesso
         } catch (error) {
+            console.error(`Erro ao conectar ao Azure Cosmos DB: ${error}`);
             attempts++;
-            console.error(`Erro ao conectar ao MongoDB (tentativa ${attempts}):`, error);
             if (attempts >= maxAttempts) {
-                console.error('Número máximo de tentativas alcançado. Encerrando o processo.');
-                process.exit(1);
+                console.error('Máximo de tentativas alcançado. Não foi possível conectar ao banco de dados.');
+                process.exit(1); // Fecha o processo se não conseguir conectar após várias tentativas
             }
-            await new Promise(res => setTimeout(res, 5000));
+            // Aguarda alguns segundos antes de tentar novamente
+            await new Promise(resolve => setTimeout(resolve, 5000));
         }
     }
 };
