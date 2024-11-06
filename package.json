@@ -1,8 +1,6 @@
 {
     "name": "biblioteca-comunitaria",
     "version": "1.0.0",
-    "lockfileVersion": 3,
-    "requires": true,
     "description": "Projeto de gerenciamento de biblioteca comunitária.",
     "main": "server.js",
     "scripts": {
@@ -30,7 +28,7 @@
         "nodemon": "^3.1.7"
     },
     "engines": {
-        "node": "16.x"
+        "node": "20.x"
     },
     "author": "Anna Clara Gomes Silva Sousa",
     "license": "MIT"
