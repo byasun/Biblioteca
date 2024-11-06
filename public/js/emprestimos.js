@@ -1,5 +1,5 @@
 // Base URL para API
-const BASE_API_URL = 'https://biblioteca-regap-7049125ed8fd.herokuapp.com/api/v1';
+const BASE_API_URL = 'https://biblioteca-regap.azurewebsites.net/api/v1/usuarios/registrar';
 
 // Classe para operações relacionadas a empréstimos
 class EmprestimoService {

@@ -1,4 +1,4 @@
-const BASE_API_URL = 'https://biblioteca-regap-7049125ed8fd.herokuapp.com/api/v1';
+const BASE_API_URL = 'https://biblioteca-regap.azurewebsites.net/api/v1/usuarios/registrar';
 
 document.addEventListener('DOMContentLoaded', function () {
     const formularioUsuario = document.getElementById('formUsuario');
