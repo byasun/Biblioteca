@@ -40,11 +40,11 @@ app.use('/api/v1/livros', livroRoutes);
 app.use('/api/v1/emprestimos', emprestimoRoutes);
 
 // Middleware para servir arquivos estáticos (frontend)
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public'))); // Ajuste para caminho correto
 
 // Para todas as rotas não capturadas, envia o index.html (single-page app)
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Tratamento de erros global
